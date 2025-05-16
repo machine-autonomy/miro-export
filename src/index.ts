@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from "puppeteer";
-import type { BoardObject } from "./miro-types.ts";
 import type { GetBoardsFilter } from "./miro-runtime.ts";
+import type { BoardObject } from "./miro-types.ts";
 
 interface InitialMiroBoardOptions {
   token?: string;
@@ -22,7 +22,10 @@ export class MiroBoard {
   }
 
   private async initialize(options: InitialMiroBoardOptions) {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox"]
+    });
     const page = await browser.newPage();
 
     if (options.token) {
