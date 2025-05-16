@@ -37,7 +37,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email ""
-          cd mimosa_wiki_en.wiki
+          cd ./mimosa_workspace.wiki
           git add -A
           git commit -m "update translation" || true
           git push
