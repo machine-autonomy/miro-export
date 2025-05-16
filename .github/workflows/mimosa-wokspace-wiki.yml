@@ -1,0 +1,39 @@
+name: Translate MIMoSA wiki from Japanese to English
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * *"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          node-version: 22.9.0
+
+      - name: Install the project
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/checkout@v3
+        with:
+          repository: machine-autonomy/mimosa_workspace.wiki
+          path: ./mimosa_workspace.wiki
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Execute SVG generation
+        run: |
+          npx miro-export -t ${{ secrets.MIRO_TOKEN }} -i ./mimosa_workspace.wiki/miro.json
+
+      - name: push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email ""
+          cd mimosa_wiki_en.wiki
+          git add -A
+          git commit -m "update translation" || true
+          git push
