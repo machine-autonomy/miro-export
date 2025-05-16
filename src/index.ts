@@ -22,6 +22,8 @@ export class MiroBoard {
   }
 
   private async initialize(options: InitialMiroBoardOptions) {
+    console.log("Initializing MiroBoard...");
+
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox"]
