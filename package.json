@@ -20,7 +20,7 @@
   "homepage": "https://github.com/jolle/miro-export",
   "main": "./build/index.js",
   "bin": {
-    "miro-export": "./build/cli.js"
+    "miro-export": "./build/mimosa-cli.js"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -41,11 +41,12 @@
   "dependencies": {
     "@commander-js/extra-typings": "^12.1.0",
     "commander": "^12.1.0",
-    "puppeteer": "^23.11.1"
+    "puppeteer": "^23.11.1",
+    "zod": "^3.24.4"
   },
   "scripts": {
     "lint": "eslint src/*.ts && prettier -c src/*.ts",
-    "build": "tsc && echo \"#!/usr/bin/env node\n$(cat ./build/cli.js)\" > ./build/cli.js",
+    "build": "tsc && echo \"#!/usr/bin/env node\n$(cat ./build/mimosa-cli.js)\" > ./build/mimosa-cli.js",
     "test": "npm run test:board-object-types && npm run test:api",
     "test:board-object-types": "tsx tests/board-object-types.ts",
     "test:api": "tsx tests/api.test.ts"
