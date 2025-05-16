@@ -3,7 +3,7 @@ name: Translate MIMoSA wiki from Japanese to English
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 15 * * *"
+    - cron: "0 14 * * *"
 
 jobs:
   main:
