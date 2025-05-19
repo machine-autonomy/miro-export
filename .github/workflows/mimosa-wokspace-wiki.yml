@@ -33,6 +33,10 @@ jobs:
         run: |
           npx miro-export -t ${{ secrets.MIRO_TOKEN }} -i ./mimosa_workspace.wiki/miro.json
 
+      - name: Convert SVGs to PNGs
+        run: |
+          find ./mimosa_workspace.wiki/images -name "*.svg" -exec sh -c 'npx flatten-svg -i "$0" -o "${0%.svg}.svg"' {} \;
+
       - name: push changes
         run: |
           git config --global user.name "github-actions"
